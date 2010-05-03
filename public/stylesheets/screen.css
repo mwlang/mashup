@@ -1,8 +1,12 @@
+body {
+	background-color: #333;
+}
 .feed {
+	background-color: #e5f5f5;
 	float: left;
 	width: 30%;
 	margin: 10px;
-	border: 1px solid #eee;
+	border: 1px solid #333;
 }
 .articles {
 	overflow: auto;
@@ -11,11 +15,14 @@
 .article {
 	margin-left: 10px;
 	margin-right: 10px;
-	background-color: #f8f5ed;
+	background-color: white;
 	margin-bottom: 5px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	border: 1px solid white;
 }
 .feed span a {
-	font-size: 2em;
+	font-size: 1.5em;
 	font-weight: bold;
 	text-decoration: none;
 	margin-left: 10px;
@@ -28,17 +35,16 @@
 	margin-left: 10px;
 	margin-top: 0px;
 	padding-top: 0px;
+	padding-bottom: 0px;
 }
 .article p {
 	margin-left: 2px;
-	padding: 0px;
-	padding-top: 2px;
-	padding-left: 5px;
-	padding-right: 5px;
+	padding: 2px;
 	font-size: .9em;
 }
 .article p a {
 	text-decoration: none;
+	color: #11A;
 }
 .article a span {
 	display: none;
@@ -46,7 +52,7 @@
 .article a:hover span {
 	display: block;
 	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-bottom: 0px;
 	font-size: .9em;
 	padding-left: 5px;
 	padding-right: 5px;
