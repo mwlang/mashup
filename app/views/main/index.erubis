@@ -1,0 +1,27 @@
+	<% @feeds.each do |feed| %>
+		<div class="feed" id="feed-<%= feed.id %>">
+	    	<span class="header"><a class='title' href='<%= feed.link %>'><%= feed.title %></a></span>
+		    <p><%= "Updated on #{feed.last_updated.strftime('%m/%d/%Y')} at #{feed.last_updated.strftime('%I:%M%p')}" %></p>
+		    <%= "<p>#{feed.description}</p>" if feed.description %>
+			<div class="articles">
+				<% feed.new_articles.each do |article| %>
+					<div class="article" id="article-<%= article.id %>">
+						<p><a target="_blank" 
+								onclick="mark_as_read(<%= article.id %>);" 
+								href='<%= article.link %>'>
+							<%= article.title %>
+			        		<span><%= article.description.gsub(/<[^>]+>/,"").squeeze(" ").strip %><br/><center>Published: <%= article.published_at.strftime("%m/%d/%Y") %> at <%= article.published_at.strftime("%I:%M%p") %></center></span></a>
+			    		</p>
+					</div>
+				<% end %>
+			</div>
+		</div>
+   <% end %>
+
+<script type="text/javascript">
+	function mark_as_read(article_id) {
+		$.post('/mark_as_read', {"article_id": article_id});
+		$("#article-" + article_id).toggle();
+		return false;
+	}
+</script>
