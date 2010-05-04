@@ -3,9 +3,6 @@ module Fetcher
   FIVE_MINUTES = 5 * 60 
   EXPIRATION_DATE = Date.today - 30
 
-  THREAD_DB_CONFIG = YAML.load(File.read(File.join(PADRINO_ROOT, 'config', 'database.yml')))
-  TDB = Sequel.connect(THREAD_DB_CONFIG[Padrino.env.to_s])
-
   class << self 
     def last_published(channel)
       channel.items.map{|m| m.date}.sort.last
@@ -38,6 +35,7 @@ module Fetcher
     end
 
     def delete_expired_articles
+      expiration_date = 
       TDB[:articles].filter(:created_at < EXPIRATION_DATE).delete
     end
 
@@ -46,13 +44,18 @@ module Fetcher
     end
   end 
 
-  loop do
-    begin
-      delete_expired_articles
-      refresh_feeds
-    rescue => e
-      logger.error e.inspect
+  Thread.new do 
+    THREAD_DB_CONFIG = YAML.load(File.read(File.join(PADRINO_ROOT, 'config', 'database.yml')))
+    TDB = Sequel.connect(THREAD_DB_CONFIG[Padrino.env.to_s])
+
+    loop do
+      begin
+        delete_expired_articles
+        refresh_feeds
+      rescue => e
+        logger.error e.inspect
+      end
+      sleep FIVE_MINUTES
     end
-    sleep FIVE_MINUTES
   end
 end
