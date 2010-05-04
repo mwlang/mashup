@@ -8,6 +8,7 @@ gem 'thin' # or mongrel
 # Component requirements
 gem 'sequel'
 gem 'sqlite3-ruby'
+gem 'sequel_plus'
 
 # Test requirements
 gem 'rspec', :require => "spec", :group => "test"
