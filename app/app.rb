@@ -3,7 +3,7 @@ class Mashup < Padrino::Application
     ##
     # Application-specific configuration options
     #
-    # set :raise_errors, true     # Show exceptions (default for development)
+    set :raise_errors, true     # Show exceptions (default for development)
     # set :public, "foo/bar"      # Location for static assets (default root/public)
     # set :reload, false          # Reload application files (default in development)
     # set :default_builder, "foo" # Set a custom form builder (default 'StandardFormBuilder')

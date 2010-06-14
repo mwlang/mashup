@@ -1,11 +1,12 @@
 	<% @feeds.each do |feed| %>
 		<div class="feed" id="feed-<%= feed.id %>">
-	    	<span class="header"><a class='title' href='<%= feed.link %>'><%= feed.title %></a></span>
+	    	<span class="header"><a class='title' title='<%= feed.description if feed.description %>' href='<%= feed.link %>'><%= feed.title %></a></span>
 		    <p><%= "Updated on #{feed.last_updated.strftime('%m/%d/%Y')} at #{feed.last_updated.strftime('%I:%M%p')}" %></p>
-		    <%= "<p>#{feed.description}</p>" if feed.description %>
+		    
 			<div class="articles">
 				<% feed.new_articles.each do |article| %>
 					<div class="article" id="article-<%= article.id %>">
+						<p onclick="mark_as_read(<%= article.id %>);" style="float: right; width: 10px; height: 10px; background-color: blue; color: white;">X</p>
 						<p><a target="_blank" 
 								onclick="mark_as_read(<%= article.id %>);" 
 								href='<%= article.link %>'>
